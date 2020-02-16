@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+```
+rails generate scaffold Post name:string title:string content:text
+rails db:migrate
+```
