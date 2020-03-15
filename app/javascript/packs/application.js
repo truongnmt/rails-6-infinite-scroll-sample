@@ -15,12 +15,25 @@ require("channels");
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("infinite-scroll");
+function docReady(fn) {
+  // see if DOM is already available
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    // call on next available tick
+    setTimeout(fn, 1);
+  } else {
+    document.addEventListener("DOMContentLoaded", fn);
+  }
+}
 
-var elem = document.querySelector(".container");
-var infScroll = new InfiniteScroll(elem, {
-  // options
-  path: ".pagination__next",
-  append: ".post",
-  history: false
-});
+docReady(function () {
+  let InfiniteScroll = require("infinite-scroll");
+
+  var elem = document.querySelector("tbody");
+  var infScroll = new InfiniteScroll(elem, {
+    // options
+    path: ".pagination a[rel=next]",
+    append: "tr",
+    history: false,
+    debug: true
+  });
+})
